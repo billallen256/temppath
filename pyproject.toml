@@ -1,0 +1,39 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+authors = ["Bill Allen <billallen256@gmail.com>"]
+description = "A quick way to get a temporary pathlib.Path."
+homepage = "http://github.com/billallen256/temppath"
+license = "MIT"
+name = "temppath"
+readme = "README.md"
+version = "0.0.1"
+
+[tool.poetry.dependencies]
+python = ">=3.4"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38
+isolated_build = true
+
+[gh-actions]
+python =
+	3.8: py38
+	3.9: py39
+
+[testenv]
+recreate = true
+changedir = tests
+deps =
+	pylint
+commands =
+	python -m pylint --disable=C,R -s no temppath
+	python -m unittest discover
+"""
