@@ -12,7 +12,7 @@ provides `pathlib.Path` objects, this is not an issue.
 There is a nice context manager, which will remove the path for you.
 
 ```python
-from temppath import TemporaryPath
+from temppath import TemporaryPathContext
 
 with TemporaryPathContext() as t:
     t.write_text('the quick brown fox jumps over the lazy dog')

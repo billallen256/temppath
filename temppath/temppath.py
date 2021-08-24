@@ -6,9 +6,16 @@ from string import ascii_letters, digits
 from tempfile import gettempdir
 
 def make_rand_name(length: int=15) -> str:
+    '''
+    Returns a random string of alphanumeric characters.
+    Always starts with a letter, not a number.
+    '''
     return choice(ascii_letters) + ''.join([choice(ascii_letters+digits) for i in range(length-1)])
 
 def TemporaryPath() -> Path:
+    '''
+    Returns a pathlib.Path in the system-defined temporary directory.
+    '''
     return Path(gettempdir()).joinpath(make_rand_name())
 
 # The original implementation attempted to make TemporaryPath and
@@ -16,6 +23,10 @@ def TemporaryPath() -> Path:
 # pathlib.Path is difficult to subclass in a sustainable way.
 
 class TemporaryPathContext:
+    '''
+    Context manager that provides a TemporaryPath then deletes it
+    once the context ends.
+    '''
     def __enter__(self) -> Path:
         self.path = TemporaryPath()  # pylint: disable=W0201
         self.path.touch()
