@@ -7,9 +7,6 @@ import temppath
 class TemporaryPathTests(unittest.TestCase):
     def test_manual(self):
         path = temppath.TemporaryPath()
-        self.assertTrue(path.is_file())
-
-        path.unlink()
         self.assertFalse(path.exists())
 
     def test_write_read(self):
@@ -20,7 +17,7 @@ class TemporaryPathTests(unittest.TestCase):
         path.unlink()
 
     def test_context_manager(self):
-        with temppath.TemporaryPath() as path:
+        with temppath.TemporaryPathContext() as path:
             path.write_text('lorem ipsum doler sit amet')
             self.assertTrue(path.exists())
             self.assertEqual(path.read_text(), 'lorem ipsum doler sit amet')

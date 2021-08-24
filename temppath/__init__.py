@@ -1,1 +1,1 @@
-from .temppath import TemporaryPath
+from .temppath import TemporaryPath, TemporaryPathContext
